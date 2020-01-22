@@ -54,7 +54,7 @@ func (s *Server) getConnectionState(cluster appv1.Cluster, errorMessage string) 
 	}
 
 	config := cluster.RESTConfig()
-	config.Timeout = time.Second
+	config.Timeout = 5 * time.Second
 	version, err := s.kubectl.GetServerVersion(config)
 	if err != nil {
 		clusterInfo.Status = appv1.ConnectionStatusFailed
