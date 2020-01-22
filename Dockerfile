@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
     make \
     wget \
     gcc \
+    awscli \
     zip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -32,7 +33,6 @@ RUN ./install.sh kubectl-linux
 RUN ./install.sh ksonnet-linux
 RUN ./install.sh helm-linux
 RUN ./install.sh kustomize-linux
-RUN ./install.sh aws-cli
 
 ####################################################################################################
 # Argo CD Base - used as the base for both the release and dev argocd images
