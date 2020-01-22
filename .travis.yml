@@ -1,0 +1,18 @@
+language: shell
+services:
+- docker
+sudo: required
+env:
+  global:
+  - DOCKER_USERNAME=edxbuilder
+  - IMAGE_NAMESPACE=edxops
+  - IMAGE_TAG=$TRAVIS_COMMIT
+  # Encrypted DOCKER_PASSWORD
+  - secure: sJhq5f8HlrKBghXYSXXFxWc3PAyYAYqSbcZCkIvxlt/6jGBKPvzEQaLvPA0+44vi7FTnINtioAPPZiJ7y7pK2yTA5tOQNES8u1GW4vKg5wU8fdvUHgGgAp7CcLmrHWJYzLRGB66LKemyNvpXM9ad95FPdIgEQmnnJjhoDfzbeJ9+eqjI/dL9bkpnjb4jifoI6lVpKQVvNRVldajScrgNRcatuIPHoLZOPSyn5AGAit5GadLiSuxDdBmBYkKQhLh2id0oOdPyNBfh8JCckTrGla1ihJKAuB244yCyCHhnHSH5HyG3qwmbsNavM8csBnc6GEtXlFDnG8l+MhZ0IhADgLD90Xc8e/GIuyW+9G+/ryU0IdkaxQqGrLduOoQSWvzEjRvRZU7GsIKjwjH1rSsT1Q/kAGo3wCsyrfyfSB+VPmUIZ9Ohddgu50IfZTLyRbbFUnHVYfnrYrQzG5qfNDLybou4/GCfkG9Gp+eO8VZ/KVjyr9aekVbySkka28WzPX2UCko0gHI8SU/WNekgTeTogWhUfBpHhsi/+jWNH/R0K4MJBgkIZZjUg45ED8KatMwRv7xpOgxStddq4HL4swng+zhSgkg0NKnF+lnScn16CbZRztbevPooJN0+ow98eHHwQqMT7saEAGyDXmOcUUC0cEO2YkPQZoo3PDOwGw5lIFA=
+script:
+- make image
+deploy:
+  provider: script
+  script: bash docker_push.sh
+  on:
+    branch: master
